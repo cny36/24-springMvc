@@ -1,0 +1,41 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.12.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.cny'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        //排除springboot自带的logback日志框架
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    //替换log4j2日志框架
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
