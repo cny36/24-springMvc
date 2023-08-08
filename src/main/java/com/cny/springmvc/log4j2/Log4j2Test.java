@@ -16,4 +16,6 @@ public class Log4j2Test {
         log.trace("trace");
     }
 
+
+
 }
